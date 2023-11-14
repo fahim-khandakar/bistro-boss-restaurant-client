@@ -33,8 +33,8 @@ const NavBar = () => {
         <NavLink to="/secret">Secret</NavLink>
       </li>
       <li>
-        <NavLink to="/">
-          <button className="btn btn-xs bg-transparent text-white  border-none ">
+        <NavLink to="/dashboard/cart">
+          <button className="btn btn-xs bg-transparent hover:bg-neutral text-white  border-none ">
             <FaCartArrowDown className="text-xl"></FaCartArrowDown>
             <div className="badge badge-secondary">+{carts.length}</div>
           </button>
