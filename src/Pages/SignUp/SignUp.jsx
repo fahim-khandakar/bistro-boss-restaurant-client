@@ -5,8 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import "animate.css";
+import userAxiosPublic from "../../Hooks/userAxiosPublic";
+import GoogleLogin from "../../components/GoogleLogin/GoogleLogin";
 
 const SignUp = () => {
+  const axiosPublic = userAxiosPublic();
   const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
@@ -20,37 +23,43 @@ const SignUp = () => {
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
-        Swal.fire({
-          title: "Account created successfully",
-          showClass: {
-            popup: `
-                animate__animated
-                animate__fadeInUp
-                animate__faster
-              `,
-          },
-          hideClass: {
-            popup: `
-                animate__animated
-                animate__fadeOutDown
-                animate__faster
-              `,
-          },
-        });
-        navigate("/");
-        updateUserProfile(data.name, data.photoURL)
-          .then(() => {
-            console.log("user name, photo updated");
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
 
-        reset();
+        updateUserProfile(data.name, data.photoURL)
+          .then((res) => {
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+            console.log(res);
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user added to the database");
+                reset();
+                navigate("/");
+                Swal.fire({
+                  title: "Account created successfully",
+                  showClass: {
+                    popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                      `,
+                  },
+                  hideClass: {
+                    popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                      `,
+                  },
+                });
+              }
+            });
+            console.log(res);
+          })
+          .catch((err) => console.log(err));
       })
-      .catch((err) => {
-        console.log(err.message);
-      });
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -161,6 +170,7 @@ const SignUp = () => {
                   value="Sign Up"
                 />
               </div>
+              <GoogleLogin></GoogleLogin>
             </form>
             <p className="flex justify-center pb-10">
               <small>
