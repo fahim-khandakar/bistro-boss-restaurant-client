@@ -6,8 +6,10 @@ import {
   FaRadiation,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../Hooks/useCart";
 
 const Dashboard = () => {
+  const [carts] = useCart();
   return (
     <div className="flex gap-10">
       <div className="w-64 min-h-screen bg-orange-400">
@@ -27,7 +29,7 @@ const Dashboard = () => {
           <li>
             <NavLink to="/dashboard/cart">
               <FaCartArrowDown className="text-xl"></FaCartArrowDown>
-              My Cart
+              My Cart ({carts.length})
             </NavLink>
           </li>
           <li>

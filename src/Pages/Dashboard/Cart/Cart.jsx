@@ -1,10 +1,40 @@
+import Swal from "sweetalert2";
 import useCart from "../../../Hooks/useCart";
+import { FaTrashAlt } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Cart = () => {
-  const [carts] = useCart();
+  const [carts, refetch] = useCart();
+  const axiosSecure = useAxiosSecure();
   const totalPrice = carts.reduce((total, current) => {
     return total + current.price;
   }, 0);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <div className="flex justify-evenly">
@@ -13,7 +43,7 @@ const Cart = () => {
         <button className="btn btn-warning">Pay</button>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto my-10">
         <table className="table">
           {/* head */}
           <thead>
@@ -26,13 +56,9 @@ const Cart = () => {
             </tr>
           </thead>
           <tbody>
-            {carts.map((item) => (
+            {carts.map((item, index) => (
               <tr key={item._id}>
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th>
+                <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
@@ -43,22 +69,17 @@ const Cart = () => {
                         />
                       </div>
                     </div>
-                    <div>
-                      <div className="font-bold">Hart Hagerty</div>
-                      <div className="text-sm opacity-50">United States</div>
-                    </div>
                   </div>
                 </td>
-                <td>
-                  Zemlak, Daniel and Leannon
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    Desktop Support Technician
-                  </span>
-                </td>
-                <td>Purple</td>
+                <td>{item.name}</td>
+                <td>${item.price}</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="btn btn-ghost btn-lg"
+                  >
+                    <FaTrashAlt></FaTrashAlt>
+                  </button>
                 </th>
               </tr>
             ))}
