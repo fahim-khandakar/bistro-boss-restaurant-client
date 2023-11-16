@@ -3,12 +3,13 @@ import Main from "../layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Menu from "../Pages/Menu/Menu";
 import Order from "../Pages/Order/Order/Order";
-import LogIn from "../Pages/Login/LogIn";
+import LogIn from "../Pages/LogIn/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoutes";
 import Secret from "../Pages/Shared/Secret/Secret";
 import Dashboard from "../layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart/Cart";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -60,6 +61,13 @@ export const router = createBrowserRouter([
             <Cart></Cart>
           </PrivateRoute>
         ),
+      },
+
+      // admin routes
+
+      {
+        path: "users",
+        element: <AllUsers></AllUsers>,
       },
     ],
   },

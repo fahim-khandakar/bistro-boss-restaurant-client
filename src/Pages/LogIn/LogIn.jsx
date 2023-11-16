@@ -9,6 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 import "animate.css";
+import GoogleLogin from "../../components/GoogleLogin/GoogleLogin";
 
 const LogIn = () => {
   const [disabled, setDisabled] = useState(true);
@@ -126,6 +127,7 @@ const LogIn = () => {
                   type="submit"
                   value="Login"
                 />
+                <GoogleLogin></GoogleLogin>
               </div>
             </form>
             <p className="flex justify-center pb-10">

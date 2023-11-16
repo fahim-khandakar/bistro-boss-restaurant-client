@@ -76,7 +76,7 @@ const Cart = () => {
                 <th>
                   <button
                     onClick={() => handleDelete(item._id)}
-                    className="btn btn-ghost btn-lg"
+                    className="btn btn-ghost btn-lg text-red-600"
                   >
                     <FaTrashAlt></FaTrashAlt>
                   </button>
