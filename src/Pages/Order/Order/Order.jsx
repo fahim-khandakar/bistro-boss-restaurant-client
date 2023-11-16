@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet";
 const Order = () => {
   const categories = ["pizza", "soup", "salad", "dessert", "drinks"];
   const { category } = useParams();
+  console.log(category);
   const initialIndex = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
 
