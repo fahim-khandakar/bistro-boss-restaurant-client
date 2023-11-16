@@ -39,7 +39,9 @@ const Cart = () => {
     <div>
       <div className="flex justify-evenly">
         <h2 className="text-5xl">Items: {carts.length}</h2>
-        <h2 className="text-5xl">Total Price: {totalPrice}</h2>
+        <h2 className="text-5xl">
+          Total Price: {parseFloat(totalPrice.toFixed(2))}
+        </h2>
         <button className="btn btn-warning">Pay</button>
       </div>
 
