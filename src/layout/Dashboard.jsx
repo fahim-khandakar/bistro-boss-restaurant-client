@@ -111,7 +111,7 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="flex-1 pt-10">
+      <div className="flex-1 pt-5">
         <Outlet></Outlet>
       </div>
     </div>
