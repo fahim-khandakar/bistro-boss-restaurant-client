@@ -14,7 +14,8 @@ const UpdateItem = () => {
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = userAxiosPublic();
   const axiosSecure = useAxiosSecure();
-  const onSubmit = async (data) => {
+  const handleUpdate = async (data) => {
+    // console.log(name);
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
@@ -43,7 +44,6 @@ const UpdateItem = () => {
         });
       }
     }
-    console.log(res.data);
   };
 
   return (
@@ -53,7 +53,7 @@ const UpdateItem = () => {
         subHeading="Update Info"
       ></SectionTitle>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(handleUpdate)}>
           <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Recipe Name*</span>
@@ -68,7 +68,6 @@ const UpdateItem = () => {
           </div>
 
           <div className="flex gap-6">
-            {/* category  */}
             <div className="form-control w-full my-6">
               <label className="label">
                 <span className="label-text">Category*</span>
@@ -89,7 +88,6 @@ const UpdateItem = () => {
               </select>
             </div>
 
-            {/* price  */}
             <div className="form-control w-full my-6">
               <label className="label">
                 <span className="label-text">Price*</span>
@@ -103,6 +101,7 @@ const UpdateItem = () => {
               />
             </div>
           </div>
+
           <div className="form-control">
             <label className="label">
               <span className="label-text">Recipe Details</span>

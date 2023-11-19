@@ -44,10 +44,6 @@ const ManageItems = () => {
     });
   };
 
-  const handleUpdate = (id) => {
-    console.log(id);
-  };
-
   return (
     <div>
       <SectionTitle
@@ -92,10 +88,7 @@ const ManageItems = () => {
                   <td>${item.price}</td>
                   <th>
                     <Link to={`/dashboard/updateItem/${item._id}`}>
-                      <button
-                        onClick={() => handleUpdate(item._id)}
-                        className="btn btn-ghost btn-lg text-orange-600"
-                      >
+                      <button className="btn btn-ghost btn-lg text-orange-600">
                         <FaEdit></FaEdit>
                       </button>
                     </Link>
