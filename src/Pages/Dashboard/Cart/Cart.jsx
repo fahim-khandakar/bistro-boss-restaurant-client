@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useCart from "../../../Hooks/useCart";
 import { FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [carts, refetch] = useCart();
@@ -42,7 +43,15 @@ const Cart = () => {
         <h2 className="text-5xl">
           Total Price: {parseFloat(totalPrice.toFixed(2))}
         </h2>
-        <button className="btn btn-warning">Pay</button>
+        {carts.length ? (
+          <Link to="/dashboard/payment">
+            <button className="btn btn-warning">Pay</button>
+          </Link>
+        ) : (
+          <button disabled className="btn btn-warning">
+            Pay
+          </button>
+        )}
       </div>
 
       <div className="overflow-x-auto my-10">

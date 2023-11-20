@@ -37,6 +37,18 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/dashboard/cart">
+                  <FaCartArrowDown className="text-xl"></FaCartArrowDown>
+                  My Cart ({carts.length})
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/paymentHistory">
+                  <FaCartArrowDown className="text-xl"></FaCartArrowDown>
+                  Payment History
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/dashboard/manageItems">
                   <FaList className="text-xl"></FaList>
                   Manage Items
@@ -79,6 +91,12 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/review">
                   <FaRadiation className="text-xl"></FaRadiation>
                   Add Review
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/paymentHistory">
+                  <FaCartArrowDown className="text-xl"></FaCartArrowDown>
+                  Payment History
                 </NavLink>
               </li>
               <li>
