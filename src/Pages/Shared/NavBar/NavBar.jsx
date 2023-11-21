@@ -7,7 +7,7 @@ import useCart from "../../../Hooks/useCart";
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [carts] = useCart();
-  console.log(carts);
+
   const handleLogOut = () => {
     logOut()
       .then((result) => {
@@ -32,6 +32,7 @@ const NavBar = () => {
       <li>
         <NavLink to="/secret">Secret</NavLink>
       </li>
+
       <li>
         <NavLink to="/dashboard/cart">
           <button className="btn btn-xs bg-transparent hover:bg-neutral text-white  border-none ">
@@ -40,6 +41,7 @@ const NavBar = () => {
           </button>
         </NavLink>
       </li>
+
       {user ? (
         <>
           {/* <span>{user?.displayName}</span> */}
