@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { FaCartArrowDown } from "react-icons/fa";
 import useCart from "../../../Hooks/useCart";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [carts] = useCart();
-
+  const [isAdmin] = useAdmin();
   const handleLogOut = () => {
     logOut()
       .then((result) => {
@@ -33,14 +34,26 @@ const NavBar = () => {
         <NavLink to="/secret">Secret</NavLink>
       </li>
 
-      <li>
-        <NavLink to="/dashboard/cart">
-          <button className="btn btn-xs bg-transparent hover:bg-neutral text-white  border-none ">
-            <FaCartArrowDown className="text-xl"></FaCartArrowDown>
-            <div className="badge badge-secondary">+{carts.length}</div>
-          </button>
-        </NavLink>
-      </li>
+      {user && isAdmin && (
+        <li>
+          <NavLink to="/dashboard/adminHome">
+            <button className="btn btn-xs bg-transparent hover:bg-neutral text-white  border-none ">
+              <FaCartArrowDown className="text-xl"></FaCartArrowDown>
+              <div className="badge badge-secondary">+{carts.length}</div>
+            </button>
+          </NavLink>
+        </li>
+      )}
+      {user && !isAdmin && (
+        <li>
+          <NavLink to="/dashboard/userHome">
+            <button className="btn btn-xs bg-transparent hover:bg-neutral text-white  border-none ">
+              <FaCartArrowDown className="text-xl"></FaCartArrowDown>
+              <div className="badge badge-secondary">+{carts.length}</div>
+            </button>
+          </NavLink>
+        </li>
+      )}
 
       {user ? (
         <>
